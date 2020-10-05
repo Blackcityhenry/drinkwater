@@ -20,13 +20,13 @@ var drinkwater = new Vue(
       },
       waterarea: function(){
         var temp;
-        temp = this.waterlevel - 2 > 0 ? this.waterlevel - 2 : 0;
+        temp = this.waterlevel - 1 > 0 ? this.waterlevel - 1 : 0;
         temp += '%';
         return temp;
       },
       emptyarea: function(){
         var temp;
-        temp = this.waterlevel - 2 < 0 ? 0 : this.waterlevel + 2;
+        temp = this.waterlevel - 1 < 0 ? 0 : this.waterlevel + 1;
         temp += '%';
         return temp;
       }
