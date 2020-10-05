@@ -14,8 +14,20 @@ var drinkwater = new Vue(
       drinkwaterInterval: 3600000
     },
     computed:{
-      stylePercentage: function(){
+      waterlevel: function(){
         var temp = this.countingSec / this.drinkwaterInterval * 100;
+        return temp;
+      },
+      waterarea: function(){
+        var temp;
+        temp = this.waterlevel - 2 > 0 ? this.waterlevel - 2 : 0;
+        temp += '%';
+        return temp;
+      },
+      emptyarea: function(){
+        var temp;
+        temp = this.waterlevel - 2 < 0 ? 0 : this.waterlevel + 2;
+        temp += '%';
         return temp;
       }
     },
