@@ -40,11 +40,11 @@ var drinkwater = new Vue(
         clearInterval(this.counting);
         var drink = setInterval(()=>{
           if ( this. countingSec > 0){
-            this.countingSec -= 1000
+            this.countingSec -= 10000
           } else {
             clearInterval(drink);
           }
-        }, 50)
+        }, 1)
         this.countDownOneHour();
 
       },
