@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>見字飲水</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@2.3.12/dist/vuetify.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-app-bar app :class="theme">
+        <v-avatar class="white mr-3 elevation-8">
+          <v-icon :class="text">
+            mdi-cup
+          </v-icon>
+        </v-avatar>
+        <v-toolbar-title>
+          見字飲水
+        </v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn @click="info = true" fab small text class="white--text">
+          <v-icon>
+            mdi-information-outline
+          </v-icon>
+
+        </v-btn>
+      </v-app-bar>
+      <v-main>
+        <v-container fill-height class="justify-center">
+          <v-btn fab class="drink-button white--text" :class="theme" @click="resetClock()">
+            <v-icon>
+              mdi-cup
+            </v-icon>
+          </v-btn>
+        </v-container>
+      </v-main>
+      <v-dialog v-model="info" width="700">
+        <v-card>
+          <v-card-title>見字飲水</v-card-title>
+          <v-card-text>你可以開住呢個網做其他野，我會每個鐘提你飲水。</v-card-text>
+          <v-card-text>飲完水就㩒個掣。</v-card-text>
+          <v-card-text>如果你早過我提你就飲左水，都可以㩒掣重置計時。</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn v-if="!noti" @click="grantNoti()">提我</v-btn>
+            <v-btn @click="info = false" :class="theme">收皮</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js" integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.3.12/dist/vuetify.min.js" integrity="sha256-/+w3ynrA1LYl14sh5PVOkdmRxnaac4QpDfOffL+UR/s=" crossorigin="anonymous"></script>
+  <script src="js/main.js" charset="utf-8"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+</body>
+</html>

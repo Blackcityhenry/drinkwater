@@ -1,0 +1,12 @@
+html, body{
+  overflow-y: auto;
+}
+
+.drink-button{
+  height: 400px !important;
+  width: 400px !important;
+}
+
+.drink-button .v-icon{
+  font-size: 12rem !important;
+}
