@@ -8,7 +8,16 @@ var drinkwater = new Vue(
       info: false,
       noti: null,
       timer: null,
-      trigger: null
+      countingSec: 0,
+      counting: null,
+      trigger: null,
+      drinkwaterInterval: 3600000
+    },
+    computed:{
+      stylePercentage: function(){
+        var temp = this.countingSec / this.drinkwaterInterval * 100;
+        return temp;
+      }
     },
     methods: {
       resetClock(){
@@ -16,8 +25,16 @@ var drinkwater = new Vue(
 
         clearTimeout(this.timer);
         clearInterval(this.trigger);
-
+        clearInterval(this.counting);
+        var drink = setInterval(()=>{
+          if ( this. countingSec > 0){
+            this.countingSec -= 1000
+          } else {
+            clearInterval(drink);
+          }
+        }, 50)
         this.countDownOneHour();
+
       },
       grantNoti(){
         Notification.requestPermission().then(
@@ -34,12 +51,15 @@ var drinkwater = new Vue(
         this.noti = Notification.permission == 'granted';
       },
       countDownOneHour(){
+        this.counting = setInterval(()=>{
+          if ( this.countingSec < this.drinkwaterInterval ){
+            this.countingSec += 1000;
+          } else {}
+        }, 1000)
 
         this.timer = setTimeout(()=>{
           this.triggerNoti();
-        }, 3600000)
-        // testing mode
-        // }, 10000)
+        }, this.drinkwaterInterval)
       },
       triggerNoti(){
 
