@@ -13,7 +13,27 @@ var drinkwater = new Vue(
       trigger: null,
       drinkwaterInterval: 3600000,
       setting: false,
-      recurringNoti: true
+      recurringNoti: true,
+      drinkwaterOption: [
+        {
+          interval: 1800000,
+          text: '半個鐘'
+        },
+        {
+          interval: 3600000,
+          text: '一個鐘'
+        },
+        {
+          interval: 5400000,
+          text: '個半鐘'
+        },
+        {
+          interval: 7200000,
+          text: '兩個鐘'
+        },
+      ]
+      ,
+      cupsOfWaterDrank: 0
     },
     computed:{
       waterlevel: function(){
@@ -93,12 +113,17 @@ var drinkwater = new Vue(
 
           new Notification('見字飲水！');
           new Audio('./audio/water.mp3').play();
-          
+
         }
+
+      },
+      getStoredSetting(){
+        this.recurringNoti = !localStorage.getItem('recurringNoti') == 'false';
 
       }
     },
     created(){
+      this.getStoredSetting();
       this.checkPermission();
       this.countDownOneHour();
     }
