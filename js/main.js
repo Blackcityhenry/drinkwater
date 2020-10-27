@@ -59,6 +59,8 @@ var drinkwater = new Vue(
       },
       drinkwaterInterval(timeout){
         localStorage.setItem('drinkwaterInterval', timeout);
+
+        this.resetClock();
       },
       cupsOfWaterDrank(cups){
         localStorage.setItem('cupsOfWaterDrank', cups);
@@ -79,9 +81,7 @@ var drinkwater = new Vue(
           }
         }, 1)
 
-        this.cupsOfWaterDrank++;
-
-        this.countDownOneHour();
+        this.countdown();
 
       },
       grantNoti(){
@@ -98,7 +98,11 @@ var drinkwater = new Vue(
       checkPermission(){
         this.noti = Notification.permission == 'granted';
       },
-      countDownOneHour(){
+      drinkWater(){
+        this.resetClock();
+        this.cupsOfWaterDrank++;
+      },
+      countdown(){
         this.counting = setInterval(()=>{
           if ( this.countingSec < this.drinkwaterInterval ){
             this.countingSec += 1000;
@@ -135,7 +139,7 @@ var drinkwater = new Vue(
     created(){
       this.getStoredSetting();
       this.checkPermission();
-      this.countDownOneHour();
+      this.countdown();
     }
   }
 );
