@@ -43,7 +43,16 @@
               mdi-cup
             </v-icon>
           </v-btn>
+
         </v-container>
+
+        <div class="drank">
+          <v-icon>
+            mdi-cup-water
+          </v-icon>
+          一路以嚟你已經飲左{{ cupsOfWaterDrank }}杯水
+
+        </div>
       </v-main>
       <v-dialog v-model="info" width="700">
         <v-card>
@@ -65,7 +74,7 @@
             設定
           </v-card-title>
           <v-card-text>
-            <v-select v-model="drinkwaterInterval" label="隔幾耐飲一次水" :items="drinkwaterOption" item-value="interval" item-name="text"></v-select>
+            <v-select v-model="drinkwaterInterval" label="隔幾耐飲一次水" :color="theme" :items="drinkwaterOption" item-value="interval" item-name="text"></v-select>
             <v-switch :color="theme" v-model="recurringNoti" label="提到你飲為止"></v-switch>
           </v-card-text>
           <v-card-actions>

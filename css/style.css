@@ -10,3 +10,9 @@ html, body{
 .drink-button .v-icon{
   font-size: 12rem !important;
 }
+
+.drank{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}

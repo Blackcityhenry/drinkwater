@@ -56,6 +56,12 @@ var drinkwater = new Vue(
     watch:{
       recurringNoti(boolean){
         localStorage.setItem('recurringNoti', boolean);
+      },
+      drinkwaterInterval(timeout){
+        localStorage.setItem('drinkwaterInterval', timeout);
+      },
+      cupsOfWaterDrank(cups){
+        localStorage.setItem('cupsOfWaterDrank', cups);
       }
     },
     methods: {
@@ -72,6 +78,9 @@ var drinkwater = new Vue(
             clearInterval(drink);
           }
         }, 1)
+
+        this.cupsOfWaterDrank++;
+
         this.countDownOneHour();
 
       },
@@ -118,8 +127,9 @@ var drinkwater = new Vue(
 
       },
       getStoredSetting(){
-        this.recurringNoti = !localStorage.getItem('recurringNoti') == 'false';
-
+        this.recurringNoti = localStorage.getItem('recurringNoti') == 'true';
+        localStorage.getItem('drinkwaterInterval') !== null ? this.drinkwaterInterval = JSON.parse(localStorage.getItem('drinkwaterInterval')) : '';
+        localStorage.getItem('cupsOfWaterDrank') !== null ? this.cupsOfWaterDrank = JSON.parse(localStorage.getItem('cupsOfWaterDrank')) : '';
       }
     },
     created(){
