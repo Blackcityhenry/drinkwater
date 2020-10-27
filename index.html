@@ -24,11 +24,16 @@
 
         <v-spacer></v-spacer>
 
+        <v-btn @click="setting = true" fab small text class="white--text">
+          <v-icon>
+            mdi-cog
+          </v-icon>
+        </v-btn>
+
         <v-btn @click="info = true" fab small text class="white--text">
           <v-icon>
             mdi-information-outline
           </v-icon>
-
         </v-btn>
       </v-app-bar>
       <v-main>
@@ -53,11 +58,26 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+      <v-dialog v-model="setting" width="700">
+        <v-card>
+          <v-card-title>
+            設定
+          </v-card-title>
+          <v-card-text>
+            <v-switch :color="theme" v-model="recurringNoti" label="提到你飲為止"></v-switch>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn :class="theme" @click="setting = false">收皮</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-app>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js" integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.3.12/dist/vuetify.min.js" integrity="sha256-/+w3ynrA1LYl14sh5PVOkdmRxnaac4QpDfOffL+UR/s=" crossorigin="anonymous"></script>
   <script src="js/main.js" charset="utf-8"></script>
-  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
 </body>
 </html>

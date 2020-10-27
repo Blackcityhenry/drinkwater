@@ -11,7 +11,9 @@ var drinkwater = new Vue(
       countingSec: 0,
       counting: null,
       trigger: null,
-      drinkwaterInterval: 3600000
+      drinkwaterInterval: 3600000,
+      setting: false,
+      recurringNoti: true
     },
     computed:{
       waterlevel: function(){
@@ -29,6 +31,11 @@ var drinkwater = new Vue(
         temp = this.waterlevel - 1 < 0 ? 0 : this.waterlevel + 1;
         temp += '%';
         return temp;
+      }
+    },
+    watch:{
+      recurringNoti(boolean){
+        localStorage.setItem('recurringNoti', boolean);
       }
     },
     methods: {
@@ -75,10 +82,20 @@ var drinkwater = new Vue(
       },
       triggerNoti(){
 
-        this.trigger = setInterval(()=>{
+        if ( this.recurringNoti ){
+
+          this.trigger = setInterval(()=>{
+            new Notification('見字飲水！');
+            new Audio('./audio/water.mp3').play();
+          },1000)
+
+        } else {
+
           new Notification('見字飲水！');
           new Audio('./audio/water.mp3').play();
-        },1000)
+          
+        }
+
       }
     },
     created(){
