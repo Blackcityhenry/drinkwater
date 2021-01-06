@@ -1,8 +1,28 @@
+axios.defaults.baseURL = 'https://api.jsonbin.io';
+axios.defaults.headers.common['collection-id'] = '5ff559b5a2070e409d6eb5a8';
+axios.defaults.headers.common['secret-key'] = '$2b$10$bDqR4LrowIPy5rSABN9wAOEdt70bAjulXqAlBgc9IE5cReu4sPaQu';
+
 var drinkwater = new Vue(
   {
     el: '#app',
     vuetify: new Vuetify(),
     data: {
+      login: {
+        username: '',
+        password: '',
+      },
+      reg: {
+        username: '',
+        nickname: '',
+        password: '',
+        confirmPassword: ''
+      },
+      user: {
+        username: '',
+        nickname: '',
+        hashed: '',
+        cups: ''
+      },
       theme: 'light-blue lighten-2',
       text: 'light-blue--text text--lighten-2',
       info: false,
@@ -33,9 +53,14 @@ var drinkwater = new Vue(
         },
       ]
       ,
-      cupsOfWaterDrank: 0
+      cupsOfWaterDrank: 0,
+      loginDialog: false,
+      showRegister: false
     },
     computed:{
+      isLoggedin(){
+        return localStorage.getItem('drinkWaterUser') !== null;
+      },
       waterlevel: function(){
         var temp = this.countingSec / this.drinkwaterInterval * 100;
         return temp;
@@ -67,6 +92,13 @@ var drinkwater = new Vue(
       }
     },
     methods: {
+      showLogin(){
+        this.loginDialog = true;
+        this.showRegister = false;
+      },
+      showRegister(){
+
+      },
       resetClock(){
         this.grantNoti();
 
