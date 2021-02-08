@@ -1,7 +1,3 @@
-axios.defaults.baseURL = 'https://api.jsonbin.io';
-axios.defaults.headers.common['collection-id'] = '5ff559b5a2070e409d6eb5a8';
-axios.defaults.headers.common['secret-key'] = '$2b$10$bDqR4LrowIPy5rSABN9wAOEdt70bAjulXqAlBgc9IE5cReu4sPaQu';
-
 var drinkwater = new Vue(
   {
     el: '#app',
