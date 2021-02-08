@@ -1,7 +1,21 @@
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/',
+      name: 'home'
+    },
+    {
+      path: '/leaderboard',
+      name: 'leaderboard'
+    }
+  ]
+})
+
 var drinkwater = new Vue(
   {
     el: '#app',
     vuetify: new Vuetify(),
+    router,
     data: {
       login: {
         username: '',
