@@ -83,6 +83,14 @@
           </div>
         </v-container>
 
+        <v-container fill-height v-else-if="$route.name === 'leaderboard'">
+          <v-row class="justify-center">
+            <v-col md="6">
+              <!-- <v-data-table :headers="leaderboardHeader" :sort-by="cups"></v-data-table> -->
+            </v-col>
+          </v-row>
+        </v-container>
+
 
         <v-btn to="/leaderboard" fab fixed left bottom :class="theme" dark v-if="$route.name !== 'leaderboard'">
           <v-icon>
@@ -97,6 +105,8 @@
           <v-card-text>飲完水就㩒個掣。</v-card-text>
           <v-card-text>如果你早過我提你就飲左水，都可以㩒掣重置計時。</v-card-text>
           <v-card-actions>
+            <v-btn href="https://paypal.me/blackcityhenry" target="_blank" rel="noreferrer noopener">
+              請我飲杯水</v-btn>
             <v-spacer></v-spacer>
             <v-btn v-if="!noti" @click="grantNoti()">提我</v-btn>
             <v-btn @click="info = false" :class="theme">收皮</v-btn>
@@ -144,10 +154,8 @@
             <v-card-text>
               <p>Q: 點解飲杯水都要注冊？</p>
               <p>A: 登入左之後可以跨裝置記錄你飲左幾多杯水，唔登入就淨係記本機。你諗你。</p>
-              <v-text-field v-model="reg.username" label="用戶名" :color="theme"></v-text-field>
+              <v-text-field v-model="reg.username" label="用戶名" :color="theme" :type="showUsername.type" :append-icon="showUsername.icon" @click:append="toggleShowUsername()" @blur="checkUser()" :error="usernameError" :error-messages="usernameError ? '有人用左呢個用戶名喇喎' : ''"></v-text-field>
               <v-text-field v-model="reg.nickname" label="花名" :color="theme"></v-text-field>
-              <v-text-field v-model="reg.password" label="密碼" :color="theme"></v-text-field>
-              <v-text-field v-model="reg.confirmPassword" label="打多次密碼" :color="theme"></v-text-field>
             </v-card-text>
             <v-card-actions class="pa-5">
               <v-btn @click="showRegister = false">番去登入</v-btn>

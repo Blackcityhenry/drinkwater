@@ -1,3 +1,5 @@
+axios.defaults.baseURL = 'https://water.blackcityhenry.workers.dev'
+
 const router = new VueRouter({
   routes: [
     {
@@ -19,18 +21,14 @@ var drinkwater = new Vue(
     data: {
       login: {
         username: '',
-        password: '',
       },
       reg: {
         username: '',
         nickname: '',
-        password: '',
-        confirmPassword: ''
       },
       user: {
         username: '',
         nickname: '',
-        hashed: '',
         cups: ''
       },
       theme: 'light-blue lighten-2',
@@ -65,7 +63,23 @@ var drinkwater = new Vue(
       ,
       cupsOfWaterDrank: 0,
       loginDialog: false,
-      showRegister: false
+      showRegister: false,
+      showUsername: {
+        type: 'password',
+        icon: 'mdi-eye-off'
+      },
+      usernameError: false,
+      leaderboardHeader: [{
+        text: '排名',
+        value: 'rank'
+      },{
+        text: '人名',
+        value: 'ppl'
+      },{
+        text: '飲左',
+        value: 'cups'
+      }],
+      leaderboard: []
     },
     computed:{
       isLoggedin(){
@@ -106,8 +120,22 @@ var drinkwater = new Vue(
         this.loginDialog = true;
         this.showRegister = false;
       },
-      showRegister(){
-
+      toggleShowUsername(){
+        if ( this.showUsername.type === 'password' ){
+          this.showUsername.type = 'text';
+          this.showUsername.icon = 'mdi-eye';
+        } else {
+          this.showUsername.type = 'password';
+          this.showUsername.icon = 'mdi-eye-off';
+        }
+      },
+      checkUser(){
+        axios.get('/checkuser?' + this.reg.username).
+        then(
+          res=>{
+            this.usernameError = res.data;
+          }
+        )
       },
       resetClock(){
         this.grantNoti();
