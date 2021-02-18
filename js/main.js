@@ -13,11 +13,43 @@ const router = new VueRouter({
   ]
 })
 
+const store = new Vuex.Store(
+  {
+    state: {
+      leaderboard: []
+    },
+    getters:{},
+    mutations: {
+      thenLeaderboard(state, res){
+        state.leaderboard = res.data;
+      }
+    },
+    actions: {
+      fetchLeaderboard({commit}){
+        return axios.get('/leaderboard')
+        .then(
+          res => {
+            commit('thenLeaderboard', res);
+          }
+        )
+      }
+    },
+  }
+)
+
+router.beforeEach((to, from, next)=>{
+  if( to.name === 'leaderboard' ){
+    store.dispatch('fetchLeaderboard');
+  }
+  next();
+})
+
 var drinkwater = new Vue(
   {
     el: '#app',
     vuetify: new Vuetify(),
     router,
+    store,
     data: {
       login: {
         username: '',
@@ -78,8 +110,7 @@ var drinkwater = new Vue(
       },{
         text: '飲左',
         value: 'cups'
-      }],
-      leaderboard: []
+      }]
     },
     computed:{
       isLoggedin(){
@@ -100,7 +131,10 @@ var drinkwater = new Vue(
         temp = this.waterlevel - 1 < 0 ? 0 : this.waterlevel + 1;
         temp += '%';
         return temp;
-      }
+      },
+      ...Vuex.mapState([
+        'leaderboard'
+      ])
     },
     watch:{
       recurringNoti(boolean){
