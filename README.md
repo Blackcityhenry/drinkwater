@@ -11,20 +11,17 @@ https://water.fighter.hk
 Phase 1
 
 ## Drink 1 cup of water
-param: /drink
-
-method: POST
-
-body: username
-
+param: /drink  
+method: POST  
+body: username  
 description:
 1. user's cup ++
 2. return number of cups
 
 ## Create user
-param: /register
-method: POST
-body: username, nickname, (cups = 0), (isPro = false)
+param: /register  
+method: POST  
+body: username, nickname, (cups = 0), (isPro = false)  
 description:
 1. create user
 
