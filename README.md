@@ -11,9 +11,15 @@ https://water.fighter.hk
 Phase 1
 
 ## Login
+<<<<<<< HEAD
 param: /login  
 method: POST  
 body: username  
+=======
+param: /login
+method: POST
+body: username
+>>>>>>> 66f30efbdb4e3143997e92ecb362d69647f5dfb4
 description:
 1. return {nickname, cups, isPro}
 
