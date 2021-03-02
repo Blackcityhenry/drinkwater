@@ -10,6 +10,13 @@ https://water.fighter.hk
 
 Phase 1
 
+## Login
+param: /login
+method: POST
+body: username
+description:
+1. return {nickname, cups, isPro}
+
 ## Drink 1 cup of water
 param: /drink  
 method: POST  
@@ -26,22 +33,22 @@ description:
 1. create user
 
 ## Check user exist
-param: /checkuser
-method: POST
-body: username
+param: /checkuser  
+method: POST  
+body: username  
 description:
 1. return true / false
 
 ## Leaderboard
-param: /leaderboard
-method: GET
+param: /leaderboard  
+method: GET  
 description:
 1. return array of {nickname, cups, isPro} in asending order of cups
 
 ## Upgrade to Pro
-param: /registerpro
-method: POST
-body: username, secret-key
+param: /registerpro  
+method: POST  
+body: username, secret-key  
 description:
 1. change user to isPro: true
 
