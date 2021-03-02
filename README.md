@@ -12,8 +12,11 @@ Phase 1
 
 ## Drink 1 cup of water
 param: /drink
+
 method: POST
+
 body: username
+
 description:
 1. user's cup ++
 2. return number of cups
