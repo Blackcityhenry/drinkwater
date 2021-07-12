@@ -1,4 +1,4 @@
-axios.defaults.baseURL = 'https://water.blackcityhenry.workers.dev'
+axios.defaults.baseURL = 'https://api.fighter.hk/water'
 
 const router = new VueRouter({
   routes: [
@@ -164,10 +164,14 @@ var drinkwater = new Vue(
         }
       },
       checkUser(){
-        axios.get('/checkuser?' + this.reg.username).
+        var data = {
+          "username": this.reg.username
+        };
+        axios.post('/checkuser?', data).
         then(
           res=>{
-            this.usernameError = res.data;
+            this.usernameError = JSON.parse(res.data.result);
+            console.log(this.usernameError);
           }
         )
       },

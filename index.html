@@ -138,8 +138,7 @@
               飲水都要登入
             </v-card-title>
             <v-card-text>
-              <v-text-field v-model="login.username" label="用戶名" :color="theme"></v-text-field>
-              <v-text-field v-model="login.password" label="密碼" :color="theme"></v-text-field>
+              <v-text-field v-model="login.username" label="用戶名" :color="theme" ></v-text-field>
               <a @click="showRegister = true" :class="text">未飲過水？</a>
             </v-card-text>
             <v-card-actions class="pa-5">
@@ -161,7 +160,7 @@
             <v-card-actions class="pa-5">
               <v-btn @click="showRegister = false">番去登入</v-btn>
               <v-spacer></v-spacer>
-              <v-btn type="submit" :class="theme">見字注冊</v-btn>
+              <v-btn type="submit" :class="theme" :disabled="usernameError || !reg.nickname.length || !reg.nickname.length">見字注冊</v-btn>
             </v-card-actions>
           </form>
         </v-card>
