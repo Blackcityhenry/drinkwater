@@ -21,4 +21,10 @@
 
 <script>
 import WaterHeader from '@/components/WaterHeader.vue'
+
+export default ({
+  components: {
+    WaterHeader
+  }
+})
 </script>

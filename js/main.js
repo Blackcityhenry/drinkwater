@@ -18,27 +18,27 @@ const store = new Vuex.Store(
     state: {
       leaderboard: []
     },
-    getters:{},
+    getters: {},
     mutations: {
-      thenLeaderboard(state, res){
+      thenLeaderboard(state, res) {
         state.leaderboard = res.data;
       }
     },
     actions: {
-      fetchLeaderboard({commit}){
+      fetchLeaderboard({ commit }) {
         return axios.get('/leaderboard')
-        .then(
-          res => {
-            commit('thenLeaderboard', res);
-          }
-        )
+          .then(
+            res => {
+              commit('thenLeaderboard', res);
+            }
+          )
       }
     },
   }
 )
 
-router.beforeEach((to, from, next)=>{
-  if( to.name === 'leaderboard' ){
+router.beforeEach((to, from, next) => {
+  if (to.name === 'leaderboard') {
     store.dispatch('fetchLeaderboard');
   }
   next();
@@ -76,6 +76,14 @@ var drinkwater = new Vue(
       recurringNoti: true,
       drinkwaterOption: [
         {
+          interval: 10000,
+          text: '十秒鐘'
+        },
+        {
+          interval: 900000,
+          text: '三個字'
+        },
+        {
           interval: 1800000,
           text: '半個鐘'
         },
@@ -104,29 +112,29 @@ var drinkwater = new Vue(
       leaderboardHeader: [{
         text: '排名',
         value: 'rank'
-      },{
+      }, {
         text: '人名',
         value: 'ppl'
-      },{
+      }, {
         text: '飲左',
         value: 'cups'
       }]
     },
-    computed:{
-      isLoggedin(){
+    computed: {
+      isLoggedin() {
         return localStorage.getItem('drinkWaterUser') !== null;
       },
-      waterlevel: function(){
+      waterlevel: function () {
         var temp = this.countingSec / this.drinkwaterInterval * 100;
         return temp;
       },
-      waterarea: function(){
+      waterarea: function () {
         var temp;
         temp = this.waterlevel - 1 > 0 ? this.waterlevel - 1 : 0;
         temp += '%';
         return temp;
       },
-      emptyarea: function(){
+      emptyarea: function () {
         var temp;
         temp = this.waterlevel - 1 < 0 ? 0 : this.waterlevel + 1;
         temp += '%';
@@ -136,26 +144,26 @@ var drinkwater = new Vue(
         'leaderboard'
       ])
     },
-    watch:{
-      recurringNoti(boolean){
+    watch: {
+      recurringNoti(boolean) {
         localStorage.setItem('recurringNoti', boolean);
       },
-      drinkwaterInterval(timeout){
+      drinkwaterInterval(timeout) {
         localStorage.setItem('drinkwaterInterval', timeout);
 
         this.resetClock();
       },
-      cupsOfWaterDrank(cups){
+      cupsOfWaterDrank(cups) {
         localStorage.setItem('cupsOfWaterDrank', cups);
       }
     },
     methods: {
-      showLogin(){
+      showLogin() {
         this.loginDialog = true;
         this.showRegister = false;
       },
-      toggleShowUsername(){
-        if ( this.showUsername.type === 'password' ){
+      toggleShowUsername() {
+        if (this.showUsername.type === 'password') {
           this.showUsername.type = 'text';
           this.showUsername.icon = 'mdi-eye';
         } else {
@@ -163,26 +171,26 @@ var drinkwater = new Vue(
           this.showUsername.icon = 'mdi-eye-off';
         }
       },
-      checkUser(){
+      checkUser() {
         var data = {
           "username": this.reg.username
         };
         axios.post('/checkuser?', data).
-        then(
-          res=>{
-            this.usernameError = JSON.parse(res.data.result);
-            console.log(this.usernameError);
-          }
-        )
+          then(
+            res => {
+              this.usernameError = JSON.parse(res.data.result);
+              console.log(this.usernameError);
+            }
+          )
       },
-      resetClock(){
+      resetClock() {
         this.grantNoti();
 
         clearTimeout(this.timer);
         clearInterval(this.trigger);
         clearInterval(this.counting);
-        var drink = setInterval(()=>{
-          if ( this. countingSec > 0){
+        var drink = setInterval(() => {
+          if (this.countingSec > 0) {
             this.countingSec -= 10000
           } else {
             clearInterval(drink);
@@ -192,43 +200,43 @@ var drinkwater = new Vue(
         this.countdown();
 
       },
-      grantNoti(){
+      grantNoti() {
         Notification.requestPermission().then(
           permission => {
-            if ( permission == 'granted' ){
+            if (permission == 'granted') {
               this.noti = true;
-            } else if ( permission == 'denied' ){
+            } else if (permission == 'denied') {
               this.noti = false;
             }
           }
         )
       },
-      checkPermission(){
+      checkPermission() {
         this.noti = Notification.permission == 'granted';
       },
-      drinkWater(){
+      drinkWater() {
         this.resetClock();
         this.cupsOfWaterDrank++;
       },
-      countdown(){
-        this.counting = setInterval(()=>{
-          if ( this.countingSec < this.drinkwaterInterval ){
+      countdown() {
+        this.counting = setInterval(() => {
+          if (this.countingSec < this.drinkwaterInterval) {
             this.countingSec += 1000;
-          } else {}
+          } else { }
         }, 1000)
 
-        this.timer = setTimeout(()=>{
+        this.timer = setTimeout(() => {
           this.triggerNoti();
         }, this.drinkwaterInterval)
       },
-      triggerNoti(){
+      triggerNoti() {
 
-        if ( this.recurringNoti ){
+        if (this.recurringNoti) {
 
-          this.trigger = setInterval(()=>{
+          this.trigger = setInterval(() => {
             new Notification('見字飲水！');
             new Audio('./audio/water.mp3').play();
-          },1000)
+          }, 1000)
 
         } else {
 
@@ -238,13 +246,13 @@ var drinkwater = new Vue(
         }
 
       },
-      getStoredSetting(){
+      getStoredSetting() {
         this.recurringNoti = localStorage.getItem('recurringNoti') == 'true';
         localStorage.getItem('drinkwaterInterval') !== null ? this.drinkwaterInterval = JSON.parse(localStorage.getItem('drinkwaterInterval')) : '';
         localStorage.getItem('cupsOfWaterDrank') !== null ? this.cupsOfWaterDrank = JSON.parse(localStorage.getItem('cupsOfWaterDrank')) : '';
       }
     },
-    created(){
+    created() {
       this.getStoredSetting();
       this.checkPermission();
       this.countdown();
