@@ -1,7 +1,17 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib/framework';
+import { createVuetify } from 'vuetify'
+import colors from 'vuetify/util/colors'
 
-Vue.use(Vuetify);
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+// import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
-export default new Vuetify({
+export default createVuetify({
+  theme: {
+    themes: {
+      light: {
+        colors: {
+          primary: colors.lightBlue.lighten2
+        }
+      }
+    }
+  }
 });
