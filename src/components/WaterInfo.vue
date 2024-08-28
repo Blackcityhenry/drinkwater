@@ -10,7 +10,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :class="theme" @click="setting = false">收皮</v-btn>
+        <VBtn :class="theme" @click="setting = false">收皮</VBtn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -26,9 +26,9 @@
           <a @click="showRegister = true" :class="text">未飲過水？</a>
         </v-card-text>
         <v-card-actions class="pa-5">
-          <v-btn @click="loginDialog = false">唔登入住</v-btn>
+          <VBtn @click="loginDialog = false">唔登入住</VBtn>
           <v-spacer></v-spacer>
-          <v-btn :class="theme">見字登入</v-btn>
+          <VBtn :class="theme">見字登入</VBtn>
         </v-card-actions>
       </form>
       <form v-else @submit="">
@@ -42,9 +42,9 @@
           <v-text-field v-model="reg.nickname" label="花名" :color="theme"></v-text-field>
         </v-card-text>
         <v-card-actions class="pa-5">
-          <v-btn @click="showRegister = false">番去登入</v-btn>
+          <VBtn @click="showRegister = false">番去登入</VBtn>
           <v-spacer></v-spacer>
-          <v-btn type="submit" :class="theme" :disabled="usernameError || !reg.nickname.length || !reg.nickname.length">見字注冊</v-btn>
+          <VBtn type="submit" :class="theme" :disabled="usernameError || !reg.nickname.length || !reg.nickname.length">見字注冊</VBtn>
         </v-card-actions>
       </form>
     </v-card>

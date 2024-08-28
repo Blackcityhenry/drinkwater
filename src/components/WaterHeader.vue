@@ -1,13 +1,15 @@
 <template>
-  <v-app-bar app>
+  <VAppBar app class="bg-primary">
 
-    <router-link to="/">
-      <v-avatar class="white mr-3 elevation-8">
-        <v-icon :class="text">
-          mdi-cup
-        </v-icon>
-      </v-avatar>
-    </router-link>
+    <template v-slot:prepend>
+      <router-link to="/">
+        <VAvatar class="bg-white mr-3 elevation-8">
+          <VIcon class="">
+            mdi-cup
+          </VIcon>
+        </VAvatar>
+      </router-link>
+    </template>
     <router-link to="/" class="text-decoration-none black--text">
       <v-toolbar-title>
         見字飲水
@@ -17,48 +19,46 @@
 
     <v-spacer></v-spacer>
 
-    <v-tooltip bottom>
+    <VTooltip bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" @click="showLogin" fab small text class="white--text" v-if="!isLoggedin">
-          <v-icon>
-            mdi-login
-
-          </v-icon>
-        </v-btn>
+        <VBtn v-bind="attrs" v-on="on" @click="showLogin" icon="mdi-login" class="white--text" v-if="!isLoggedin">
+        </VBtn>
       </template>
-      <span>登入</span>
-    </v-tooltip>
+      <span>登入</span> 
+    </VTooltip>
 
     <!-- <v-span v-else>嗨，{{ user.nickname }}</v-span> -->
 
-    <v-tooltip bottom>
+    <VTooltip bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" @click="setting = true" fab small text class="white--text">
-          <v-icon>
-            mdi-cog
-          </v-icon>
-        </v-btn>
+        <VBtn v-bind="attrs" v-on="on" @click="setting = true" icon="mdi-cog">
+        </VBtn>
       </template>
       <span>設定</span>
-    </v-tooltip>
+    </VTooltip>
 
-    <v-tooltip bottom>
+    <VTooltip bottom>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" @click="info = true" fab small text class="white--text">
-          <v-icon>
-            mdi-information-outline
-          </v-icon>
-        </v-btn>
+        <VBtn v-bind="attrs" v-on="on" @click="info = true" icon="mdi-information-outline" class="white--text">
+        </VBtn>
       </template>
       <span>咩嚟</span>
-    </v-tooltip>
-  </v-app-bar>
+    </VTooltip>
+  </VAppBar>
 </template>
 
 <script>
+import { VIcon, VBtn, VAppBar, VAvatar, VTooltip } from 'vuetify/components';
+
 export default {
   name: 'WaterHeader',
-
+  components: {
+    VIcon,
+    VBtn,
+    VAppBar,
+    VTooltip,
+    VAvatar
+  }
 }
 </script>
 
@@ -66,3 +66,4 @@ export default {
 <style scoped lang="scss">
 
 </style>
+
