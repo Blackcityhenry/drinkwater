@@ -1,4 +1,5 @@
 import WaterButton from './components/WaterButton.vue'
+import LeaderBoard from './pages/LeaderBoard.vue';
 import { createWebHistory, createRouter } from 'vue-router';
 
 const router = createRouter({
@@ -12,6 +13,7 @@ const router = createRouter({
     {
       path: '/leaderboard',
       name: 'leaderboard',
+      component: LeaderBoard
     }
   ]
 })

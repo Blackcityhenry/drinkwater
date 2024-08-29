@@ -10,45 +10,44 @@
         </VAvatar>
       </router-link>
     </template>
-    <router-link to="/" class="text-decoration-none black--text">
-      <v-toolbar-title>
+    <VAppBarTitle>
+      <router-link to="/" class="text-decoration-none black--text">
         見字飲水
-      </v-toolbar-title>
-    </router-link>
+      </router-link>
+    </VAppBarTitle>
 
+    <template v-slot:append>
+      <WaterSetting />
+    </template>
 
-    <v-spacer></v-spacer>
-
-    <VTooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <VBtn v-bind="attrs" v-on="on" @click="showLogin" icon="mdi-login" class="white--text" v-if="!isLoggedin">
-        </VBtn>
-      </template>
-      <span>登入</span> 
-    </VTooltip>
-
-    <!-- <v-span v-else>嗨，{{ user.nickname }}</v-span> -->
-
-    <VTooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <VBtn v-bind="attrs" v-on="on" @click="setting = true" icon="mdi-cog">
-        </VBtn>
-      </template>
-      <span>設定</span>
-    </VTooltip>
-
-    <VTooltip bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <VBtn v-bind="attrs" v-on="on" @click="info = true" icon="mdi-information-outline" class="white--text">
-        </VBtn>
-      </template>
-      <span>咩嚟</span>
-    </VTooltip>
+  <!--   <VTooltip location="bottom" text="登入"> -->
+  <!--     <template v-slot:activator="{ on, attrs }"> -->
+  <!--       <VBtn v-bind="attrs" v-on="on" @click="showLogin" icon="mdi-login" class="white--text" v-if="!isLoggedin"> -->
+  <!--       </VBtn> -->
+  <!--     </template> -->
+  <!--   </VTooltip> -->
+  <!---->
+  <!--   <!-- <v-span v-else>嗨，{{ user.nickname }}</v-span> --> 
+  <!---->
+  <!--   <VTooltip location="bottom" text="設定"> -->
+  <!--     <template v-slot:activator="{ on, attrs }"> -->
+  <!--       <VBtn v-bind="attrs" v-on="on" @click="setting = true" icon="mdi-cog"> -->
+  <!--       </VBtn> -->
+  <!--     </template> -->
+  <!--   </VTooltip> -->
+  <!---->
+  <!--   <VTooltip location="bottom" text="咩嚟"> -->
+  <!--     <template v-slot:activator="{ on, attrs }"> -->
+  <!--       <VBtn v-bind="attrs" v-on="on" @click="info = true" icon="mdi-information-outline" class="white--text"> -->
+  <!--       </VBtn> -->
+  <!--     </template> -->
+  <!--   </VTooltip> -->
   </VAppBar>
 </template>
 
 <script>
-import { VIcon, VBtn, VAppBar, VAvatar, VTooltip } from 'vuetify/components';
+import { VIcon, VBtn, VAppBar, VAvatar, VAppBarTitle } from 'vuetify/components';
+import WaterSetting from './WaterSetting.vue';
 
 export default {
   name: 'WaterHeader',
@@ -56,8 +55,8 @@ export default {
     VIcon,
     VBtn,
     VAppBar,
-    VTooltip,
-    VAvatar
+    VAvatar,
+    WaterSetting
   }
 }
 </script>
