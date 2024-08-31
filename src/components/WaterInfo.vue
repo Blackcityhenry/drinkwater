@@ -1,59 +1,59 @@
 <template>
-  <v-dialog v-model="setting" width="700">
+  <VTooltip location="bottom" text="咩嚟">
+    <template v-slot:activator="{ props }">
+      <VBtn v-bind="props" @click="infoDialogModel = true" icon="mdi-information-outline" class="text-white">
+      </VBtn>
+    </template>
+  </VTooltip>
+  <v-dialog v-model="infoDialogModel" width="700">
     <v-card>
-      <v-card-title>
-        設定
-      </v-card-title>
-      <v-card-text>
-        <v-select v-model="drinkwaterInterval" label="隔幾耐飲一次水" :color="theme" :items="drinkwaterOption" item-value="interval" item-name="text"></v-select>
-        <v-switch :color="theme" v-model="recurringNoti" label="提到你飲為止"></v-switch>
-      </v-card-text>
+      <v-card-title>見字飲水</v-card-title>
+      <v-card-text>你可以開住呢個網做其他野，我會每隔一段時間提你飲水。</v-card-text>
+      <v-card-text>飲完水就㩒個掣。</v-card-text>
+      <v-card-text>如果你早過我提你就飲左水，都可以㩒掣重置計時。</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <VBtn :class="theme" @click="setting = false">收皮</VBtn>
+        <v-btn v-if="!notification" @click="grantNoti()" class="bg-grey-lighten-3">打開提醒
+        </v-btn>
+        <v-btn @click="infoDialogModel = false" class="bg-primary">收皮</v-btn>
       </v-card-actions>
-    </v-card>
-  </v-dialog>
-
-  <v-dialog v-model="loginDialog" width="700">
-    <v-card>
-      <form v-if="!showRegister">
-        <v-card-title>
-          飲水都要登入
-        </v-card-title>
-        <v-card-text>
-          <v-text-field v-model="login.username" label="用戶名" :color="theme" ></v-text-field>
-          <a @click="showRegister = true" :class="text">未飲過水？</a>
-        </v-card-text>
-        <v-card-actions class="pa-5">
-          <VBtn @click="loginDialog = false">唔登入住</VBtn>
-          <v-spacer></v-spacer>
-          <VBtn :class="theme">見字登入</VBtn>
-        </v-card-actions>
-      </form>
-      <form v-else @submit="">
-        <v-card-title>
-          飲水都要注冊
-        </v-card-title>
-        <v-card-text>
-          <p>Q: 點解飲杯水都要注冊？</p>
-          <p>A: 登入左之後可以跨裝置記錄你飲左幾多杯水，唔登入就淨係記本機。你諗你。</p>
-          <v-text-field v-model="reg.username" label="用戶名" :color="theme" :type="showUsername.type" :append-icon="showUsername.icon" @click:append="toggleShowUsername()" @blur="checkUser()" :error="usernameError" :error-messages="usernameError ? '有人用左呢個用戶名喇喎' : ''"></v-text-field>
-          <v-text-field v-model="reg.nickname" label="花名" :color="theme"></v-text-field>
-        </v-card-text>
-        <v-card-actions class="pa-5">
-          <VBtn @click="showRegister = false">番去登入</VBtn>
-          <v-spacer></v-spacer>
-          <VBtn type="submit" :class="theme" :disabled="usernameError || !reg.nickname.length || !reg.nickname.length">見字注冊</VBtn>
-        </v-card-actions>
-      </form>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import { mapWritableState } from 'pinia';
+import { useNotificationStore } from '../stores/notification';
 export default {
   name: 'WaterInfo',
+  data(){
+    return {
+      infoDialogModel: false,
+
+    }
+  },
+  computed: {
+    ...mapWritableState(useNotificationStore, ['notification'])
+  },
+  methods: {
+    grantNoti(){
+      Notification.requestPermission().then(
+        permission => {
+          if ( permission === 'granted' ){
+            this.notificaiton = true;
+          } else if ( permission === 'denied' ){
+            this.notification = false;
+          }
+        }
+      )
+    },
+    getNotiStatus(){
+      this.notification = Notification.permission === 'granted';
+    }
+  },
+  created(){
+    this.getNotiStatus();
+  }
 }
 </script>
 

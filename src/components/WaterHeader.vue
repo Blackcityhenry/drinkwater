@@ -17,7 +17,9 @@
     </VAppBarTitle>
 
     <template v-slot:append>
+      <WaterLogin />
       <WaterSetting />
+      <WaterInfo />
     </template>
 
     <!--   <VTooltip location="bottom" text="登入"> -->
@@ -47,8 +49,10 @@
 
 <script>
 import { VIcon, VAppBar, VAvatar, VAppBarTitle } from 'vuetify/components';
-import WaterSetting from './WaterSetting.vue';
 import { RouterLink } from 'vue-router';
+import WaterSetting from './WaterSetting.vue';
+import WaterLogin from './WaterLogin.vue';
+import WaterInfo from './WaterInfo.vue';
 
 export default {
   name: 'WaterHeader',
@@ -56,8 +60,10 @@ export default {
     VIcon,
     VAppBar,
     VAvatar,
+    RouterLink,
     WaterSetting,
-    RouterLink
+    WaterInfo,
+    WaterLogin,
   }
 }
 </script>
