@@ -41,7 +41,6 @@ export default {
   data() {
     return {
       settingDialogModel: false,
-      recurringNoti: false,
       notiOption: [
         "water.mp3",
         "minecraft-drinking.mp3"
@@ -75,7 +74,7 @@ export default {
     }
   },
   computed: {
-    ...mapWritableState(useSettingStore, ['notiMp3', 'drinkingIntervalModel'])
+    ...mapWritableState(useSettingStore, ['notiMp3', 'drinkingIntervalModel', 'recurringNoti'])
   },
   methods: {
     playDemo() {

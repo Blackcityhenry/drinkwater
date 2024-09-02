@@ -5,5 +5,18 @@ export const useNotificationStore = defineStore('notification', {
     return {
       notification: null,
     }
+  },
+  actions: {
+    grantNoti() {
+      Notification.requestPermission().then(
+        permission => {
+          if (permission === 'granted') {
+            this.notificaiton = true;
+          } else if (permission === 'denied') {
+            this.notification = false;
+          }
+        }
+      )
+    },
   }
 })

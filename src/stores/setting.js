@@ -5,6 +5,7 @@ export const useSettingStore = defineStore('setting', {
     return {
       notiMp3: "water.mp3",
       drinkingIntervalModel: 1800000,
+      recurringNoti: false
     }
   }
 })

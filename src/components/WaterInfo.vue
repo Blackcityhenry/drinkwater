@@ -22,41 +22,29 @@
 </template>
 
 <script>
-import { mapWritableState } from 'pinia';
+import { mapActions, mapWritableState } from 'pinia';
 import { useNotificationStore } from '../stores/notification';
+
 export default {
   name: 'WaterInfo',
-  data(){
+  data() {
     return {
       infoDialogModel: false,
-
     }
   },
   computed: {
     ...mapWritableState(useNotificationStore, ['notification'])
   },
   methods: {
-    grantNoti(){
-      Notification.requestPermission().then(
-        permission => {
-          if ( permission === 'granted' ){
-            this.notificaiton = true;
-          } else if ( permission === 'denied' ){
-            this.notification = false;
-          }
-        }
-      )
-    },
-    getNotiStatus(){
+    getNotiStatus() {
       this.notification = Notification.permission === 'granted';
-    }
+    },
+    ...mapActions(useNotificationStore, ['grantNoti'])
   },
-  created(){
+  created() {
     this.getNotiStatus();
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

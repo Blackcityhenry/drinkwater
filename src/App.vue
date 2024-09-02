@@ -6,8 +6,11 @@ import { RouterView } from 'vue-router'
 
 <template>
   <VApp>
-    <WaterHeader />
-    <RouterView />
+    <VLayout>
+      <WaterHeader />
+      <VMain>
+        <RouterView />
+      </VMain>
+    </VLayout>
   </VApp>
 </template>
-
