@@ -8,4 +8,7 @@ import App from './App.vue'
 
 const pinia = createPinia();
 
+import axios from 'axios';
+axios.defaults.baseURL = 'https://api.fighter.hk/water';
+
 createApp(App).use(vuetify).use(router).use(pinia).mount('#app')

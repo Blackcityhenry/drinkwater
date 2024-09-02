@@ -22,7 +22,7 @@
           <VBtn class="bg-primary">見字登入</VBtn>
         </v-card-actions>
       </form>
-      <form v-else @submit="">
+      <form v-else @submit="regUser()">
         <v-card-title>
           飲水都要注冊
         </v-card-title>
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'WaterLogin',
   data() {
@@ -67,7 +69,42 @@ export default {
   },
   methods: {
     checkUser() {
+      let endpoint = '/checkuser';
+      let data = {
+        username: this.reg.username
+      }
 
+      this.usernameStatusIcon = 'mdi-loading mdi-spin';
+
+      axios.post(endpoint, data).then(res => {
+        if (res.data.result === "true") {
+          // true means username taken
+
+          this.usernameStatusIcon = 'mdi-alert-circle-outline';
+          this.usernameError = true;
+        } else {
+          // false means username available
+
+          this.usernameStatusIcon = 'mdi-check';
+          this.usernameError = false;
+        }
+      })
+    },
+    regUser() {
+      let endpoint = 'register';
+      let data = this.reg;
+
+      axios.post(endpoint, data).then(res => {
+
+      })
+    },
+    loginUser() {
+      let endpoint = '/login';
+      let data = this.login;
+
+      axios.post(endpoint, data).then(res => {
+
+      })
     }
   }
 }
