@@ -1,11 +1,11 @@
 <template>
   <VTooltip location="bottom" text="設定">
     <template v-slot:activator="{ props }">
-      <VBtn v-bind="props" @click="setting = true" icon="mdi-cog" class="text-white">
+      <VBtn v-bind="props" @click="settingDialogModel = true" icon="mdi-cog" class="text-white">
       </VBtn>
     </template>
   </VTooltip>
-  <v-dialog v-model="setting" width="700">
+  <v-dialog v-model="settingDialogModel" width="700">
     <v-card>
       <v-card-title>
         設定
@@ -20,7 +20,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <VBtn class="bg-primary" @click="setting = false">收皮</VBtn>
+        <VBtn class="bg-primary" @click="settingDialogModel = false">收皮</VBtn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      setting: false,
+      settingDialogModel: false,
       recurringNoti: false,
       notiOption: [
         "water.mp3",
