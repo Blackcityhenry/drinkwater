@@ -3,8 +3,8 @@
     :style="'background: linear-gradient(to bottom, #eee 0% , #eee ' + waterarea + ' , #4fc3f7 ' + emptyarea + ' , #4fc3f7 100% )'"
     @click="drinkWater()">
   </VBtn>
-  {{ countingSec }} /
-  {{ drinkingIntervalModel }}
+  {{ countingSec / 1000 }} /
+  {{ drinkingIntervalModel / 1000 }}
 </template>
 
 <script>
@@ -56,20 +56,21 @@ export default {
       clearInterval(this.trigger);
       clearInterval(this.counting);
 
-      // for water drinking animation
-      var drink = setInterval(() => {
-        if (this.countingSec > 10000) {
-          this.countingSec -= 10000;
+      let ms = 500;
+      let substract = this.countingSec / ms;
+      let drink = setInterval(() => {
+        if (ms !== 0) {
+          this.countingSec -= substract;
+          ms--;
         } else {
           this.countingSec = 0;
           clearInterval(drink);
+          this.countdown();
         }
       }, 1)
 
-      this.countdown();
     },
     countdown() {
-      console.log('created')
       this.counting = setInterval(() => {
         if (this.countingSec < this.drinkingIntervalModel) {
           this.countingSec += 1000;
