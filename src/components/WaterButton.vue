@@ -1,6 +1,6 @@
 <template>
-  <VBtn icon="mdi-cup" class="drink-button white--text"
-    :style="'background: linear-gradient(to bottom, #eee 0% , #eee ' + waterarea + ' , #4fc3f7 ' + emptyarea + ' , #4fc3f7 100% )'"
+  <VBtn icon="mdi-cup" class="drink-button" color="white"
+    :style="`background: linear-gradient(to bottom, #eee 0% , #eee ${waterarea} , #4fc3f7 ${emptyarea} , #4fc3f7 100% )`"
     @click="drinkWater()">
   </VBtn>
   {{ countingSec / 1000 }} /
@@ -56,7 +56,7 @@ export default {
       clearInterval(this.trigger);
       clearInterval(this.counting);
 
-      let ms = 500;
+      let ms = 200;
       let substract = this.countingSec / ms;
       let drink = setInterval(() => {
         if (ms !== 0) {
@@ -73,9 +73,9 @@ export default {
     countdown() {
       this.counting = setInterval(() => {
         if (this.countingSec < this.drinkingIntervalModel) {
-          this.countingSec += 1000;
+          this.countingSec += 20;
         } else { }
-      }, 1000)
+      }, 20)
 
       this.timer = setTimeout(() => {
         this.triggerNoti();
@@ -108,4 +108,18 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.drink-button {
+  height: 400px !important;
+  width: 400px !important;
+}
+</style>
+
+<style lang="scss">
+.drink-button {
+  .v-btn__content {
+    font-size: 9rem !important;
+    color: white !important;
+  }
+}
+</style>
