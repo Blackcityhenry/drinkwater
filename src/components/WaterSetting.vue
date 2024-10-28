@@ -80,6 +80,18 @@ export default {
     playDemo() {
       new Audio(`../../audio/${this.notiMp3}`).play();
     }
+  },
+  watch: {
+    notiMp3(string) {
+      localStorage.setItem('notiMp3', string);
+    },
+     drinkingIntervalModel(value) {
+      localStorage.setItem('drinkingIntervalModel', JSON.stringify(value));
+    },
+     recurringNoti(value) {
+      localStorage.setItem('recurringNoti', JSON.stringify(value));
+    },
+
   }
 }
 </script>
