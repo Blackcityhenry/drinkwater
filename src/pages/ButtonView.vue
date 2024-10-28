@@ -1,16 +1,19 @@
 <template>
   <div class="button-view">
     <WaterButton />
+    <WaterCups />
   </div>
 </template>
 
 <script>
 import WaterButton from '../components/WaterButton.vue'
+import WaterCups from '../components/WaterCups.vue';
 
 export default {
   name: 'ButtonView',
   components: {
-    WaterButton
+    WaterButton,
+    WaterCups
   }
 }
 </script>
