@@ -49,7 +49,7 @@ export default {
   methods: {
     drinkWater() {
       this.resetClock();
-      this.cupsOfWaterDrank++;
+      this.drinkOneCup();
     },
     resetClock() {
       this.grantNoti();
@@ -97,7 +97,8 @@ export default {
         new Audio(`./audio/${this.notiMp3}`).play();
       }
     },
-    ...mapActions(useNotificationStore, ['grantNoti'])
+    ...mapActions(useNotificationStore, ['grantNoti']),
+    ...mapActions(useWaterStore, ['drinkOneCup']),
   },
   watch: {
     drinkingIntervalModel() {
